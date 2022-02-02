@@ -18,6 +18,6 @@ public class PageViewCountServlet extends HttpServlet {
         } else {
             viewCount = 0;
         }
-        out.printf("<h1>Page has been viewed %d times", viewCount);
+        out.printf("<h1>Page has been viewed %d times</h1>", viewCount);
     }
 }
