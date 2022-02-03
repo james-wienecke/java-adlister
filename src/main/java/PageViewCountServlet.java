@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 public class PageViewCountServlet extends HttpServlet {
     private int viewCount = 0;
 
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
         res.setContentType("text/html");
         String reset = req.getQueryString();
