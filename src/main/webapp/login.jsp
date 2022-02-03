@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <%@include file="partials/head.jsp"%>
     <title>Login</title>
 </head>
 <body>
@@ -31,12 +32,6 @@
     </c:when>
 </c:choose>
 
-<div>
-    <p>Path: <%= request.getRequestURL() %></p>
-    <p>Query String: <%= request.getQueryString() %></p>
-    <p>"name" parameter: <%= request.getParameter("name") %></p>
-    <p>"method" attribute: <%= request.getMethod() %></p>
-    <p>User-Agent header: <%= request.getHeader("user-agent") %></p>
-</div>
+<%@include file="partials/bs-bundle.jsp"%>
 </body>
 </html>

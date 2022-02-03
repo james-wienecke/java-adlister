@@ -8,9 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <%@include file="partials/head.jsp"%>
     <title>Profile</title>
 </head>
 <body>
 <h1>this the user profile</h1>
+
+<%@include file="partials/bs-bundle.jsp"%>
 </body>
 </html>
