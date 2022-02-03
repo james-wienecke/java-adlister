@@ -21,6 +21,16 @@
     <button type="submit" name="submit-login">Submit</button>
     <button type="reset" name="reset-login">Reset</button>
 </form>
+
+<c:choose>
+    <c:when test="${param.username.equalsIgnoreCase(\"admin\") && param.password.equalsIgnoreCase(\"password\")}">
+        <% response.sendRedirect("profile.jsp"); %>
+    </c:when>
+    <c:when test="${param.username.length() > 0}">
+        <% response.sendRedirect("login.jsp"); %>
+    </c:when>
+</c:choose>
+
 <div>
     <p>Path: <%= request.getRequestURL() %></p>
     <p>Query String: <%= request.getQueryString() %></p>
