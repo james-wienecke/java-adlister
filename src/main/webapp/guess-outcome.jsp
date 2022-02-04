@@ -13,5 +13,6 @@
 </head>
 <body>
 <h1>You guessed ${guessResults}! ${kindOfJob} job!!!</h1>
+<p>Your number: ${guessNum}, and the secret number was ${tgtNum}</p>
 </body>
 </html>

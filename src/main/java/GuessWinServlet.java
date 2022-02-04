@@ -7,12 +7,12 @@ import java.io.IOException;
 public class GuessWinServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("correct GET");
+        req.getRequestDispatcher("/guess-outcome.jsp").forward(req, resp);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("correct POST");
         req.setAttribute("guessResults", "RIGHT");
         req.setAttribute("kindOfJob", "GREAT");
         req.getRequestDispatcher("/guess-outcome.jsp").forward(req, resp);
