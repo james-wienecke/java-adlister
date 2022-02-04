@@ -12,6 +12,7 @@ public class ViewColorServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("color", req.getParameter("color-in"));
         req.getRequestDispatcher("/view-color.jsp").forward(req, resp);
     }
 }
