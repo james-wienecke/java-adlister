@@ -25,14 +25,23 @@ public class GuessTakerServlet extends HttpServlet {
 //        String userGuess = req.getParameter("guess");
         try {
             int userGuess = Integer.parseInt(req.getParameter("guess"));
+
+            if (userGuess > 3 || userGuess < 1) {
+                req.setAttribute("badGuess", true);
+                doGet(req, resp);
+            }
+            req.setAttribute("badGuess", false);
             if (userGuess == number) {
                 // forward to winner servlet
+                req.getRequestDispatcher("/correct").forward(req, resp);
             } else {
                 // forward to loser servlet
+                req.getRequestDispatcher("/incorrect").forward(req, resp);
             }
         } catch (NumberFormatException nfe) {
             req.setAttribute("badGuess", true);
-            req.getRequestDispatcher("/guess.jsp").forward(req, resp);
+//            req.getRequestDispatcher("/guess.jsp").forward(req, resp);
+            doGet(req, resp);
         }
 
     }
