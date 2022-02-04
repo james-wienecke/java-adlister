@@ -11,7 +11,6 @@ import java.util.Enumeration;
 public class PizzaFormServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.sendRedirect("/pizza-order.jsp");
         req.getRequestDispatcher("/pizza-order.jsp").forward(req, resp);
     }
 
