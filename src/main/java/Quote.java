@@ -1,4 +1,6 @@
-public class Quote {
+import java.io.Serializable;
+
+public class Quote implements Serializable {
     private long id;
     private Author author;
     private String content;

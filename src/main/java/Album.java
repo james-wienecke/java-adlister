@@ -1,4 +1,6 @@
-public class Album {
+import java.io.Serializable;
+
+public class Album implements Serializable {
     private long id;
     private String artist;
     private String name;
