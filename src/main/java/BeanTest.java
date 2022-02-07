@@ -8,6 +8,7 @@ public class BeanTest {
         List<Author> authors = new ArrayList<>();
 
         Album rumors = new Album();
+        rumors.setId(0);
         rumors.setArtist("Fleetwood Mac");
         rumors.setName("Rumors");
         rumors.setGenre("Soft rock, folk rock, pop rock");
@@ -16,7 +17,7 @@ public class BeanTest {
 
         albums.add(rumors);
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 1; i < 11; i++) {
             Album album = new Album();
             album.setName("testalbum");
             album.setArtist("testartist");
@@ -31,6 +32,7 @@ public class BeanTest {
             quote.setContent("something interesting, probably");
             quote.setId(i);
             Author author = new Author();
+            author.setId(i);
             author.setFirstName("testy");
             author.setLastName("smith");
             quote.setAuthor(author);
