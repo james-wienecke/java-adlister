@@ -1,4 +1,5 @@
 public class Album {
+    private long id;
     private String artist;
     private String name;
     private int releaseDate;
