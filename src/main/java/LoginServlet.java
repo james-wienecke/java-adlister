@@ -3,6 +3,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,10 +13,11 @@ import java.util.Map;
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getSession().getAttribute("loggedIn") == null) {
-            request.getSession().setAttribute("loggedIn", false);
-        }
-        if ((boolean) request.getSession().getAttribute("loggedIn")) {
+        HttpSession ses = request.getSession();
+//        if(ses.getAttribute("user") == null) {
+//            ses.setAttribute("loggedIn", false);
+//        }
+        if (ses.getAttribute("user") != null) {
             request.getRequestDispatcher("/profile").forward(request, response);
         }
         request.getRequestDispatcher("/login.jsp").forward(request, response);
@@ -30,13 +32,12 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         boolean validAttempt = validUsers.containsKey(username) && validUsers.containsValue(password);
 
+        HttpSession ses = request.getSession();
         if (validAttempt) {
-            request.getSession().setAttribute("loggedIn", true);
-            request.getSession().setAttribute("name", username);
+            ses.setAttribute("user",  username);
             response.sendRedirect("/profile");
         } else {
             response.sendRedirect("/login");
         }
     }
-
 }

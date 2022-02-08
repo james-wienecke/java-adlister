@@ -3,17 +3,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "ViewProfileServlet", urlPatterns = "/profile")
 public class ViewProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession().getAttribute("loggedIn") != null && (boolean) request.getSession().getAttribute("loggedIn")) {
+        HttpSession ses = request.getSession();
+        if (ses.getAttribute("user") != null) {
             request.setAttribute("name", request.getSession().getAttribute("name"));
             request.getRequestDispatcher("WEB-INF/profile.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("/login").forward(request, response);
-        }
 
+        }
     }
 }
