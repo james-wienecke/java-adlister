@@ -8,6 +8,12 @@ import java.io.IOException;
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getSession().getAttribute("loggedIn") == null) {
+            request.getSession().setAttribute("loggedIn", false);
+        }
+        if ((boolean) request.getSession().getAttribute("loggedIn")) {
+            request.getRequestDispatcher("/profile").forward(request, response);
+        }
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
@@ -17,6 +23,7 @@ public class LoginServlet extends HttpServlet {
         boolean validAttempt = username.equals("admin") && password.equals("password");
 
         if (validAttempt) {
+            request.getSession().setAttribute("loggedIn", true);
             response.sendRedirect("/profile");
         } else {
             response.sendRedirect("/login");
