@@ -9,6 +9,7 @@ import java.io.IOException;
 public class ViewProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("loggedIn") != null && (boolean) request.getSession().getAttribute("loggedIn")) {
+            request.setAttribute("name", request.getSession().getAttribute("name"));
             request.getRequestDispatcher("WEB-INF/profile.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("/login").forward(request, response);

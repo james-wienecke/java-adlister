@@ -4,6 +4,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
@@ -18,15 +22,21 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Map<String, String> validUsers = new HashMap<>();
+        validUsers.put("admin", "password");
+        validUsers.put("maldur", "thac0ruinedmylife");
+        validUsers.put("gregtall", "okwhatever");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        boolean validAttempt = username.equals("admin") && password.equals("password");
+        boolean validAttempt = validUsers.containsKey(username) && validUsers.containsValue(password);
 
         if (validAttempt) {
             request.getSession().setAttribute("loggedIn", true);
+            request.getSession().setAttribute("name", username);
             response.sendRedirect("/profile");
         } else {
             response.sendRedirect("/login");
         }
     }
+
 }
