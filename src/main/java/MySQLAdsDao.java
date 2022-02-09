@@ -41,6 +41,7 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public Long insert(Ad ad) {
+        long rowsAffected = 0;
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate("INSERT INTO ads (id, user_id, title, description) VALUES(" +
@@ -51,10 +52,12 @@ public class MySQLAdsDao implements Ads {
             ResultSet rs = statement.getGeneratedKeys();
             while (rs.next()) {
                 System.out.println("Ad creation success");
+                rowsAffected = rs.getLong(1);
             }
 
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
+        return rowsAffected;
     }
 }
