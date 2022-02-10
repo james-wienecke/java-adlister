@@ -36,7 +36,7 @@ public class MySQLUsersDao implements Users {
                     rs.getString("email"),
                     rs.getString("password"));
         } catch (SQLException e) {
-            throw new RuntimeException("Error finding the user.", e);
+            System.out.println("User not found: " + username);
         }
         return user;
     }
