@@ -21,16 +21,22 @@ public class RegisterServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO: ensure the submitted information is valid
         // TODO: create a new user based off of the submitted information
         // TODO: if a user was successfully created, send them to their profile
         User user = new User(
-                request.getParameter("username"), // for now we'll hardcode the user id
+                request.getParameter("username"),
                 request.getParameter("email"),
                 request.getParameter("password")
         );
-        DaoFactory.getUsersDao().insert(user);
-        response.sendRedirect("/profile");
+
+        if (DaoFactory.getUsersDao().findByUsername(user.getUsername()) == null) {
+            DaoFactory.getUsersDao().insert(user);
+            response.sendRedirect("/profile");
+        } else {
+            request.getRequestDispatcher("/WEB-INF/users/register.jsp")
+                    .forward(request, response);
+        }
     }
 }
