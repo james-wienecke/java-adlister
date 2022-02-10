@@ -23,7 +23,22 @@ public class MySQLUsersDao implements Users {
 
     @Override
     public User findByUsername(String username) {
-        return null;
+        User user = null;
+        try {
+            String sql = "SELECT * FROM users WHERE username = ?";
+            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            user = new User(
+                    rs.getLong("id"),
+                    rs.getString("username"),
+                    rs.getString("email"),
+                    rs.getString("password"));
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding the user.", e);
+        }
+        return user;
     }
 
     @Override
@@ -32,8 +47,6 @@ public class MySQLUsersDao implements Users {
             String sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getEmail());
-            stmt.setString(3, user.getPassword());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
